@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  app:
+    image: python
+    container_name: scrocrix-hackerrank
+    working_dir: /etc/local/hackerrank
+    command: bash -c "while true; do sleep 1000; done"
+    volumes:
+      - .:/etc/local/hackerrank
