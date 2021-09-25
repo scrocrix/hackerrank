@@ -37,6 +37,49 @@ func (this *balancedBrackets) TestIsBalanced() {
 
 		result = medium.IsBalanced("aa")
 		require.Equal(this.T(), "NO", result)
+
+		result = medium.IsBalanced("{(([])[])[]}")
+		require.Equal(this.T(), "YES", result)
+
+		result = medium.IsBalanced("{(([])[])[]}[]")
+		require.Equal(this.T(), "YES", result)
+
+		result = medium.IsBalanced("{(([])[])[]]}")
+		require.Equal(this.T(), "NO", result)
+	})
+
+	this.Run("Test case 5", func() {
+		result := medium.IsBalanced("{}")
+		require.Equal(this.T(), "YES", result)
+
+		result = medium.IsBalanced("}([[{)[]))]{){}[")
+		require.Equal(this.T(), "NO", result)
+
+		result = medium.IsBalanced("{]]{()}{])")
+		require.Equal(this.T(), "NO", result)
+
+		result = medium.IsBalanced("(){}")
+		require.Equal(this.T(), "YES", result)
+
+		result = medium.IsBalanced("{}{()}{{}}")
+		require.Equal(this.T(), "YES", result)
+	})
+
+	this.Run("Test case 13", func() {
+		result := medium.IsBalanced("{}{}{}[([]{}{})]{}()()[[[]][()[]]]()[][]{}({}{()}([]{})()){[]}")
+		require.Equal(this.T(), "YES", result)
+
+		result = medium.IsBalanced("(([([]{{}({{[[()[][]]]}({[][()]{}}{}(){}){}([])}{()()})})]{()([])}")
+		require.Equal(this.T(), "NO", result)
+
+		result = medium.IsBalanced("[]))([{}()()])([]){}[{()()}][{}[[]()]({{([{}{}[]{()}[]])[(){([])}")
+		require.Equal(this.T(), "NO", result)
+	})
+
+	this.Run("Test case 9", func() {
+		result := medium.IsBalanced("[([{{}}]{[[][][([[]]){[]}{}]]}[]{{}}{})[[]]]{{}}(()[[[[[(){}[]]({}")
+
+		require.Equal(this.T(), "YES", result)
 	})
 }
 

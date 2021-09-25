@@ -1,25 +1,46 @@
 package medium
 
-func IsBalanced(s string) string {
-	right := len(s) - 1
-	left := 0
+import (
+	"strings"
+)
 
-	if len(s) == 1 || len(s) == 0 {
+func IsBalanced(s string) string {
+	var t []string
+
+	if (!strings.Contains(s, "[") && !strings.Contains(s, "]") &&
+		!strings.Contains(s, "{") && !strings.Contains(s, "}") &&
+		!strings.Contains(s, "(") && !strings.Contains(s, ")")) ||
+		len(s) == 0 {
 		return "NO"
 	}
 
-	for left < right {
-		o := string(s[left])
-		c := string(s[right])
+	for _, i := range s {
+		ii := string(i)
 
-		if (o == "{" && c == "}") || (o == "(" && c == ")") || (o == "[" && c == "]") {
-			right = right - 1
-			left = left + 1
+		if ii == "(" || ii == "{" || ii == "[" {
+			t = append(t, ii)
 			continue
 		}
 
-		return "NO"
+		if ii == ")" || ii == "}" || ii == "]" {
+			if len(t) == 0 {
+				continue
+			}
+
+			tt := t[len(t)-1]
+
+			if (tt == "(" && ii == ")") || (tt == "[" && ii == "]") || (tt == "{" && ii == "}") {
+				t = t[:len(t)-1]
+				continue
+			}
+
+			return "NO"
+		}
 	}
 
-	return "YES"
+	if len(t) == 0 {
+		return "YES"
+	}
+
+	return "NO"
 }
