@@ -24,7 +24,7 @@ func IsBalanced(s string) string {
 
 		if ii == ")" || ii == "}" || ii == "]" {
 			if len(t) == 0 {
-				continue
+				return "NO"
 			}
 
 			tt := t[len(t)-1]
